@@ -1,13 +1,10 @@
 package com.currency.currencyConverter.repository;
 
-import org.springframework.stereotype.Repository;
-
-import java.util.Arrays;
+import com.currency.currencyConverter.models.currency;
+import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
-@Repository
-public class currencyRepository {
-    public List<String> findAllCurrencies() {
-        return Arrays.asList("USD", "EUR", "GBP");
-    }
+public interface currencyRepository extends CrudRepository<currency, String> {
+    @Override
+    List<currency> findAll();
 }

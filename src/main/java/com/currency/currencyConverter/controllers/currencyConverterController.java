@@ -1,19 +1,29 @@
 package com.currency.currencyConverter.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.currency.currencyConverter.models.currency;
 import com.currency.currencyConverter.services.currencyService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class currencyConverterController {
 
-    @Autowired
-    currencyService cService;
+    com.currency.currencyConverter.services.currencyService currencyService;
 
-    @RequestMapping("/currencies")
-    public String getCurrencies() {
-        return cService.getCurrencyString();
+    public currencyConverterController(currencyService currencyService) {
+        this.currencyService = currencyService;
     }
 
+    // Lists all currencies
+    @RequestMapping(value = "/currencies", produces = { "application/json" }, method = RequestMethod.GET)
+    public ResponseEntity<List<currency>> convertCurrency() {
+        return new ResponseEntity<>(this.currencyService.getAllCurrencies(), HttpStatus.OK);
+    }
 }
