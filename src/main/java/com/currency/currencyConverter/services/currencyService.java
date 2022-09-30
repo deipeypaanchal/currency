@@ -17,9 +17,7 @@ public class currencyService {
         this.cRepository = cRepository;
     }
     public List<currency> getAllCurrencies() {
-        List<currency> currencyList = this.cRepository.findAll();
-        currencyList.sort(Comparator.comparing(currency::getName));
-        return currencyList;
+        return this.cRepository.findAll();
     }
 
 }
